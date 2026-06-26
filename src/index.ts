@@ -27,7 +27,7 @@ const UA = 'pipeworx-mcp-maptiler/1.0 (+https://pipeworx.io)';
 const tools: McpToolExport['tools'] = [
   {
     name: 'geocode',
-    description: 'Forward geocoding.',
+    description: '"Geocode [address]" / "find coordinates of [place]" / "lat lng for [city]" / "search OpenStreetMap-backed places" — forward geocoding via MapTiler (OpenStreetMap-curated). Returns ranked candidates with lat/lng, address components, and feature IDs for re-lookup via geocode_by_id. Alternative to Mapbox/Google geocoders when you want OSM data.',
     inputSchema: {
       type: 'object',
       properties: {
@@ -46,23 +46,23 @@ const tools: McpToolExport['tools'] = [
   },
   {
     name: 'geocode_reverse',
-    description: 'Reverse geocoding.',
+    description: '"What address is at [lat,lng]" / "reverse geocode [coords]" / "what place is at this point" — reverse geocoding (coordinates → address / locality / region) via MapTiler.',
     inputSchema: {
       type: 'object',
       properties: { lon: { type: 'number' }, lat: { type: 'number' }, language: { type: 'string' }, limit: { type: 'number' }, types: { type: 'string' } },
       required: ['lon', 'lat'],
     },
   },
-  { name: 'geocode_by_id', description: 'Feature by id.', inputSchema: { type: 'object', properties: { id: { type: 'string' }, language: { type: 'string' } }, required: ['id'] } },
-  { name: 'elevation', description: 'Elevation at point.', inputSchema: { type: 'object', properties: { lon: { type: 'number' }, lat: { type: 'number' } }, required: ['lon', 'lat'] } },
+  { name: 'geocode_by_id', description: 'Re-fetch a MapTiler geocoding feature by its stable ID (returned in geocode / geocode_reverse results). Use to refresh or re-localize a previously discovered place.', inputSchema: { type: 'object', properties: { id: { type: 'string' }, language: { type: 'string' } }, required: ['id'] } },
+  { name: 'elevation', description: '"Elevation at [coords]" / "altitude at [point]" / "how high is [location]" / "height above sea level" — elevation in meters above sea level at a single point via MapTiler\'s SRTM/Maxar dataset.', inputSchema: { type: 'object', properties: { lon: { type: 'number' }, lat: { type: 'number' } }, required: ['lon', 'lat'] } },
   {
     name: 'elevation_polyline',
-    description: 'Elevations along a polyline.',
+    description: '"Elevation profile along [route]" / "topographic profile of [path]" / "how hilly is this trail" — elevation samples along a polyline (sequence of lat/lng). Use for hiking elevation gain, cycling grade, trail planning.',
     inputSchema: { type: 'object', properties: { coordinates: { type: 'array', items: { type: 'array', items: { type: 'number' } } } }, required: ['coordinates'] },
   },
   {
     name: 'static_map_url',
-    description: 'Static map URL (returns URL only).',
+    description: '"Static map image of [location]" / "embed a map of [coords]" / "map thumbnail PNG" / "screenshot of map" — returns a MapTiler static-tile image URL for embedding in slack, docs, emails, dashboards. Pass style + coords + zoom + width/height; returns a fetchable PNG URL. No interactive JS required.',
     inputSchema: {
       type: 'object',
       properties: {
@@ -81,14 +81,14 @@ const tools: McpToolExport['tools'] = [
   },
   {
     name: 'coordinates_convert',
-    description: 'CRS conversion.',
+    description: '"Convert WGS84 lat/lng to [other CRS]" / "reproject coordinates" / "EPSG:4326 → EPSG:[X]" / "Web Mercator coordinates" — Coordinate Reference System (CRS) reprojection. Use to convert standard lat/lng (EPSG:4326) into projected systems like Web Mercator (3857), UTM zones, state plane, etc.',
     inputSchema: {
       type: 'object',
       properties: { coordinates: { type: 'array', items: { type: 'array', items: { type: 'number' } } }, target_crs: { type: 'number' } },
       required: ['coordinates', 'target_crs'],
     },
   },
-  { name: 'tiles_json', description: 'TileJSON for a tileset.', inputSchema: { type: 'object', properties: { tileset: { type: 'string' } }, required: ['tileset'] } },
+  { name: 'tiles_json', description: 'TileJSON spec metadata for a MapTiler tileset (zoom range, bounds, layer schema). Specialist tool for GIS integrators — most users want geocode / static_map_url instead.', inputSchema: { type: 'object', properties: { tileset: { type: 'string' } }, required: ['tileset'] } },
 ];
 
 async function callTool(name: string, args: Record<string, unknown>): Promise<unknown> {
