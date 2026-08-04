@@ -1,18 +1,27 @@
-# mcp-maptiler
+# @pipeworx/maptiler
 
-MapTiler MCP.
+[MapTiler Cloud](https://docs.maptiler.com/cloud/api/) MCP — geocoding, reverse-geocoding, static maps, elevation. Free 100k req/mo.
 
-Part of [Pipeworx](https://pipeworx.io) — an MCP gateway connecting AI agents to 965+ live data sources.
+Part of [Pipeworx](https://pipeworx.io) — an MCP gateway connecting AI agents to 1394+ live data sources.
+
+## Auth
+
+- Platform: `PLATFORM_MAPTILER_KEY`. BYO: `?_apiKey=…`.
 
 ## Tools
 
-| Tool | Description |
-|------|-------------|
-| `geocode` | "Geocode [address]" / "find coordinates of [place]" / "lat lng for [city]" / "search OpenStreetMap-backed places" — forward geocoding via MapTiler (OpenStreetMap-curated). Returns ranked candidates with lat/lng, address components, and feature IDs for re-lookup via geocode_by_id. Alternative to Mapbox/Google geocoders when you want OSM data. |
-| `geocode_reverse` | "What address is at [lat,lng]" / "reverse geocode [coords]" / "what place is at this point" — reverse geocoding (coordinates → address / locality / region) via MapTiler. |
-| `elevation_polyline` | "Elevation profile along [route]" / "topographic profile of [path]" / "how hilly is this trail" — elevation samples along a polyline (sequence of lat/lng). Use for hiking elevation gain, cycling grade, trail planning. |
-| `static_map_url` | "Static map image of [location]" / "embed a map of [coords]" / "map thumbnail PNG" / "screenshot of map" — returns a MapTiler static-tile image URL for embedding in slack, docs, emails, dashboards. Pass style + coords + zoom + width/height; returns a fetchable PNG URL. No interactive JS required. |
-| `coordinates_convert` | "Convert WGS84 lat/lng to [other CRS]" / "reproject coordinates" / "EPSG:4326 → EPSG:[X]" / "Web Mercator coordinates" — Coordinate Reference System (CRS) reprojection. Use to convert standard lat/lng (EPSG:4326) into projected systems like Web Mercator (3857), UTM zones, state plane, etc. |
+- `geocode(query, language?, limit?, bbox?, proximity?, country?, types?, autocomplete?, fuzzyMatch?)` — forward geocoding
+- `geocode_reverse(lon, lat, language?, limit?, types?)` — reverse geocoding
+- `geocode_by_id(id, language?)` — feature by Mapbox-style id (e.g. `place.123456`)
+- `elevation(lon, lat)` — elevation at point
+- `elevation_polyline(coordinates)` — elevations along a polyline (`coordinates`: array of `[lon, lat]`)
+- `static_map_url(style, lon, lat, zoom, width, height, retina?, marker?, attribution?)` — static map URL (binary; pack returns the URL only)
+- `coordinates_convert(coordinates, target_crs)` — CRS conversion (e.g. WGS84 → Web Mercator)
+- `tiles_json(tileset)` — TileJSON for a tileset (e.g. `streets-v2`)
+
+## Data source
+
+`https://api.maptiler.com`
 
 ## Quick Start
 
@@ -28,7 +37,7 @@ Add to your MCP client (Claude Desktop, Cursor, Windsurf, etc.):
 }
 ```
 
-Or connect to the full Pipeworx gateway for access to all 965+ data sources:
+Or connect to the full Pipeworx gateway for access to all 1394+ data sources:
 
 ```json
 {
@@ -52,7 +61,7 @@ The gateway picks the right tool and fills the arguments automatically.
 
 ## More
 
-- [All tools and guides](https://github.com/pipeworx-io/examples)
+- [Docs and guides](https://pipeworx.io/docs)
 - [pipeworx.io](https://pipeworx.io)
 
 ## License
