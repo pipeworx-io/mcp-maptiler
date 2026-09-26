@@ -1,6 +1,6 @@
 {
   "name": "@pipeworx/mcp-maptiler",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "MapTiler MCP.",
   "type": "module",
   "main": "src/index.ts",
@@ -26,7 +26,7 @@
     "@cloudflare/workers-types": "^4.20260405.1"
   },
   "pipeworx": {
-    "sourceHash": "v1-aa0a6e6f46603a8a8bc495b34c73a5d53bbf117678970a7372a88b179cc7cb0b",
-    "sourceCommit": "adb69d997f82a62e8e22b594488c7d04a227db35"
+    "sourceHash": "v1-a02fa8c9aa9b83627319984e733703cc6b5e6557eb6863cd182e6c9c1eb3e20d",
+    "sourceCommit": "6182c4cfebddb94950e060b5d2fca18f18ad1aca"
   }
 }
