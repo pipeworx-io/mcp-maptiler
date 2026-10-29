@@ -3,7 +3,7 @@
   "name": "io.github.pipeworx-io/maptiler",
   "title": "Maptiler",
   "description": "MapTiler MCP.",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "websiteUrl": "https://pipeworx.io/packs/maptiler",
   "repository": {
     "url": "https://github.com/pipeworx-io/mcp-maptiler",
