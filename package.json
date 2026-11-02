@@ -1,6 +1,6 @@
 {
   "name": "@pipeworx/mcp-maptiler",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "MapTiler MCP.",
   "type": "module",
   "main": "lib/index.js",
@@ -27,7 +27,7 @@
     "mode": "gateway",
     "slug": "maptiler",
     "gatewaySlug": "maptiler",
-    "sourceHash": "v1-c1209d411aa3c02970b7af7ca7f5868c214bcea07cc9368f076a5e6642eda4a5",
-    "sourceCommit": "5c89d6abb778d45da5d92002eb251978622bedf9"
+    "sourceHash": "v1-e72ce9b82717ee79d28a44e8b332841ee5c060fcc322dfe54e6e77cb13344ad1",
+    "sourceCommit": "236b0a46d91f343fe094da9f499c378e88f78312"
   }
 }
